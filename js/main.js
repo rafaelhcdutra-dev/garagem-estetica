@@ -494,3 +494,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+
+/* ===== CONTROLE DA TELA DE ABERTURA ===== */
+
+(() => {
+    const intro = document.getElementById("intro-screen");
+
+    if (!intro) return;
+
+    const reduzirAnimacao = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const tempoEntrada = reduzirAnimacao ? 300 : 1900;
+
+    function finalizarIntro() {
+        intro.classList.add("intro-hidden");
+
+        window.setTimeout(() => {
+            intro.remove();
+        }, reduzirAnimacao ? 0 : 700);
+    }
+
+    window.setTimeout(finalizarIntro, tempoEntrada);
+})();
